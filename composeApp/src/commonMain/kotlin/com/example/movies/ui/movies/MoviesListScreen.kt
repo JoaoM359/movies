@@ -1,18 +1,14 @@
 package com.example.movies.ui.movies
 
-import androidx.compose.foundation.layout.Arrangement.spacedBy
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.movies.ui.components.MoviePoster
+import com.example.movies.domain.model.movie1
+import com.example.movies.ui.components.MoviesSection
 
 @Composable
 fun MoviesListRoute() = MoviesListScreen()
@@ -25,21 +21,26 @@ fun MoviesListScreen() {
             contentPadding = PaddingValues(vertical = 16.dp)
         ) {
             item {
-                Column {
-                    Text(
-                        text = "PopularMovies",
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        style = typography.titleLarge
-                    )
+                MoviesSection(
+                    title = "Popular Movies",
+                    movies = List(10) { movie1 }
+                )
+            }
 
-                    LazyRow(
-                        modifier = Modifier.padding(top = 8.dp),
-                        contentPadding = PaddingValues(horizontal = 16.dp),
-                        horizontalArrangement = spacedBy(16.dp)
-                    ) {
-                        items(10) { MoviePoster() }
-                    }
-                }
+            item {
+                MoviesSection(
+                    title = "Top Rated Movies",
+                    movies = List(10) { movie1 },
+                    modifier = Modifier.padding(top = 32.dp)
+                )
+            }
+
+            item {
+                MoviesSection(
+                    title = "Upcoming Movies",
+                    movies = List(10) { movie1 },
+                    modifier = Modifier.padding(top = 32.dp)
+                )
             }
         }
     }

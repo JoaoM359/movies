@@ -14,15 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
+import com.example.movies.domain.model.Movie
 import movies.composeapp.generated.resources.Res
 import movies.composeapp.generated.resources.minecraft_movie
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MoviePoster(modifier: Modifier = Modifier) {
-    Column(modifier = modifier.width(140.dp)) {
+fun MoviePoster(
+    movie: Movie,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier.width(140.dp)
+    ) {
         Card(
-            modifier = Modifier.size(140.dp, 210.dp),
+            modifier = Modifier.size(width = 140.dp, height = 210.dp),
             shape = RoundedCornerShape(12.dp)
         ) {
             Image(
@@ -34,7 +40,7 @@ fun MoviePoster(modifier: Modifier = Modifier) {
         }
 
         Text(
-            text = "Minecraft",
+            text = movie.title,
             maxLines = 1,
             overflow = Ellipsis,
             style = typography.titleMedium
