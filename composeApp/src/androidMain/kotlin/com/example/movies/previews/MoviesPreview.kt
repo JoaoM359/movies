@@ -12,4 +12,4 @@ private fun MoviePosterPreview() = MoviePoster(movie = movie1)
 
 @Preview
 @Composable
-private fun MoviesListScreenPreview() = MoviesListScreen()
+private fun MoviesListScreenPreview() = MoviesListScreen(popularMovies = listOf(movie1))
