@@ -19,6 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.movies.domain.model.MovieSection
 import com.example.movies.ui.components.MoviesSection
+import movies.composeapp.generated.resources.Res
+import movies.composeapp.generated.resources.movies_list_popular_movies
+import movies.composeapp.generated.resources.movies_list_top_rated_movies
+import movies.composeapp.generated.resources.movies_list_upcoming_movies
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -51,10 +56,17 @@ fun MoviesListScreen(
                     ) {
                         items(moviesListState.movieSection) { movieSection ->
                             val title = when (movieSection.sectionType) {
-                                MovieSection.SectionType.POPULAR -> "Popular Movies"
-                                MovieSection.SectionType.TOP_RATED -> "Top Rated Movies"
-                                MovieSection.SectionType.UPCOMING -> "Upcoming Movies"
+                                MovieSection.SectionType.POPULAR ->
+                                    stringResource(Res.string.movies_list_popular_movies)
+
+                                MovieSection.SectionType.TOP_RATED ->
+                                    stringResource(Res.string.movies_list_top_rated_movies)
+
+                                MovieSection.SectionType.UPCOMING ->
+                                    stringResource(Res.string.movies_list_upcoming_movies)
+
                             }
+
                             MoviesSection(title = title, movies = movieSection.movies)
                         }
                     }
