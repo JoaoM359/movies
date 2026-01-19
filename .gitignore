@@ -17,4 +17,4 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
-composeApp/src/commonMain/composeResources/values/strings.xml
+composeApp/src/commonMain/composeResources/values/keys.xml
