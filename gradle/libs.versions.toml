@@ -18,6 +18,7 @@ navigationCompose = "2.9.1"
 ktor = "3.3.3"
 kotlinx-coroutines = "1.10.2"
 koin-version = "4.1.0"
+xicon_pack_z = "1.1.1"
 
 [libraries]
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
@@ -47,6 +48,7 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+xicon_pack_z = { module = "br.com.devsrsouza.compose.icons:font-awesome", version.ref = "xicon_pack_z" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

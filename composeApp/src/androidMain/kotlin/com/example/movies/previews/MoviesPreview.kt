@@ -5,8 +5,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.movies.domain.model.MovieSection
 import com.example.movies.domain.model.movie1
 import com.example.movies.ui.components.MoviePoster
+import com.example.movies.ui.moviedetail.MovieDetailScreen
 import com.example.movies.ui.movies.MoviesListScreen
 import com.example.movies.ui.movies.MoviesListViewModel.MoviesListState
+import com.example.movies.ui.theme.MoviesAppTheme
 
 @Preview(showBackground = true)
 @Composable
@@ -36,3 +38,11 @@ private fun MoviesListScreenErrorPreview() = MoviesListScreen(
 private fun MoviesListScreenLoadingPreview() = MoviesListScreen(
     moviesListState = MoviesListState.Loading
 )
+
+@Preview
+@Composable
+private fun MoviesDetailScreensPreview() {
+    MoviesAppTheme {
+        MovieDetailScreen(movie = movie1)
+    }
+}
