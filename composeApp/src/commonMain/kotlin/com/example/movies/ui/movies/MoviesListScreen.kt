@@ -21,6 +21,7 @@ import com.example.movies.domain.model.MovieSection
 import com.example.movies.domain.model.movie1
 import com.example.movies.ui.components.MoviesSection
 import com.example.movies.ui.movies.MoviesListViewModel.MoviesListState
+import com.example.movies.ui.theme.MoviesAppTheme
 import movies.composeapp.generated.resources.Res
 import movies.composeapp.generated.resources.movies_list_popular_movies
 import movies.composeapp.generated.resources.movies_list_top_rated_movies
@@ -90,30 +91,36 @@ fun MoviesListScreen(
 @Preview
 @Composable
 private fun MoviesListScreenSuccessPreview() {
-    MoviesListScreen(
-        moviesListState = MoviesListState.Success(
-            movieSection = listOf(
-                MovieSection(
-                    sectionType = MovieSection.SectionType.POPULAR,
-                    movies = listOf(movie1)
+    MoviesAppTheme {
+        MoviesListScreen(
+            moviesListState = MoviesListState.Success(
+                movieSection = listOf(
+                    MovieSection(
+                        sectionType = MovieSection.SectionType.POPULAR,
+                        movies = listOf(movie1)
+                    )
                 )
             )
         )
-    )
+    }
 }
 
 @Preview
 @Composable
 private fun MoviesListScreenErrorPreview() {
-    MoviesListScreen(
-        moviesListState = MoviesListState.Error("Error")
-    )
+    MoviesAppTheme {
+        MoviesListScreen(
+            moviesListState = MoviesListState.Error("Error")
+        )
+    }
 }
 
 @Preview
 @Composable
 private fun MoviesListScreenLoadingPreview() {
-    MoviesListScreen(
-        moviesListState = MoviesListState.Loading
-    )
+    MoviesAppTheme {
+        MoviesListScreen(
+            moviesListState = MoviesListState.Loading
+        )
+    }
 }
