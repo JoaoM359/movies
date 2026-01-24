@@ -15,6 +15,8 @@ import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.movies.domain.model.Movie
+import com.example.movies.domain.model.movie1
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoviePoster(
@@ -43,4 +45,10 @@ fun MoviePoster(
             style = typography.titleMedium
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun MoviePosterPreview() {
+    MoviePoster(movie = movie1)
 }

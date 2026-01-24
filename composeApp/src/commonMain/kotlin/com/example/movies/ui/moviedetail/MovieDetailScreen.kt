@@ -18,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.movies.domain.model.Movie
 import com.example.movies.domain.model.movie1
+import com.example.movies.ui.theme.MoviesAppTheme
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Solid
 import compose.icons.fontawesomeicons.solid.ArrowLeft
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MovieDetailRoute() = MovieDetailScreen(movie = movie1)
@@ -63,5 +65,13 @@ fun MovieDetailScreen(movie: Movie) {
                 .padding(paddingValues = paddingValues)
         ) {
         }
+    }
+}
+
+@Preview
+@Composable
+private fun MoviesDetailScreensPreview() {
+    MoviesAppTheme {
+        MovieDetailScreen(movie = movie1)
     }
 }

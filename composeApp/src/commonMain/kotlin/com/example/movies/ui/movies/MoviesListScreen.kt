@@ -18,12 +18,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.movies.domain.model.MovieSection
+import com.example.movies.domain.model.movie1
 import com.example.movies.ui.components.MoviesSection
+import com.example.movies.ui.movies.MoviesListViewModel.MoviesListState
 import movies.composeapp.generated.resources.Res
 import movies.composeapp.generated.resources.movies_list_popular_movies
 import movies.composeapp.generated.resources.movies_list_top_rated_movies
 import movies.composeapp.generated.resources.movies_list_upcoming_movies
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -36,7 +39,7 @@ fun MoviesListRoute(
 
 @Composable
 fun MoviesListScreen(
-    moviesListState: MoviesListViewModel.MoviesListState
+    moviesListState: MoviesListState
 ) {
     Scaffold { paddingValues ->
         Box(
@@ -45,11 +48,11 @@ fun MoviesListScreen(
                 .padding(paddingValues)
         ) {
             when (moviesListState) {
-                MoviesListViewModel.MoviesListState.Loading -> {
+                MoviesListState.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
 
-                is MoviesListViewModel.MoviesListState.Success -> {
+                is MoviesListState.Success -> {
                     LazyColumn(
                         contentPadding = PaddingValues(vertical = 16.dp),
                         verticalArrangement = Arrangement.spacedBy(32.dp)
@@ -72,7 +75,7 @@ fun MoviesListScreen(
                     }
                 }
 
-                is MoviesListViewModel.MoviesListState.Error -> {
+                is MoviesListState.Error -> {
                     Text(
                         text = moviesListState.message,
                         modifier = Modifier.align(Alignment.Center).padding(16.dp),
@@ -82,4 +85,35 @@ fun MoviesListScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun MoviesListScreenSuccessPreview() {
+    MoviesListScreen(
+        moviesListState = MoviesListState.Success(
+            movieSection = listOf(
+                MovieSection(
+                    sectionType = MovieSection.SectionType.POPULAR,
+                    movies = listOf(movie1)
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+private fun MoviesListScreenErrorPreview() {
+    MoviesListScreen(
+        moviesListState = MoviesListState.Error("Error")
+    )
+}
+
+@Preview
+@Composable
+private fun MoviesListScreenLoadingPreview() {
+    MoviesListScreen(
+        moviesListState = MoviesListState.Loading
+    )
 }
