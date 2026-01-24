@@ -1,6 +1,5 @@
 package com.example.movies
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,6 +8,7 @@ import com.example.movies.di.dataModule
 import com.example.movies.di.networkModule
 import com.example.movies.di.viewModelModule
 import com.example.movies.navigation.AppRoutes
+import com.example.movies.ui.moviedetail.MovieDetailRoute
 import com.example.movies.ui.movies.MoviesListRoute
 import com.example.movies.ui.theme.MoviesAppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -34,11 +34,17 @@ fun App() {
                 startDestination = AppRoutes.MoviesList
             ) {
                 composable<AppRoutes.MoviesList> {
-                    MoviesListRoute()
+                    MoviesListRoute(
+                        navigateToMovieDetail = { movieId ->
+                            navController.navigate(
+                                AppRoutes.MovieDetails(movieId)
+                            )
+                        }
+                    )
                 }
 
                 composable<AppRoutes.MovieDetails> {
-                    // MovieDetailsScreen()
+                    MovieDetailRoute()
                 }
             }
         }

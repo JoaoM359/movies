@@ -1,5 +1,6 @@
 package com.example.movies.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -21,10 +22,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun MoviePoster(
     movie: Movie,
+    onMoviePosterClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier.width(140.dp)
+        modifier
+            .width(140.dp)
+            .clickable { onMoviePosterClick() }
     ) {
         Card(
             modifier = Modifier.size(width = 140.dp, height = 210.dp),
@@ -50,5 +54,8 @@ fun MoviePoster(
 @Preview(showBackground = true)
 @Composable
 private fun MoviePosterPreview() {
-    MoviePoster(movie = movie1)
+    MoviePoster(
+        movie = movie1,
+        onMoviePosterClick = { }
+    )
 }
