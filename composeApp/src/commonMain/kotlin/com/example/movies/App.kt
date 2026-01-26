@@ -37,13 +37,13 @@ fun App() {
                     MoviesListRoute(
                         navigateToMovieDetail = { movieId ->
                             navController.navigate(
-                                AppRoutes.MovieDetails(movieId)
+                                AppRoutes.MovieDetail(movieId)
                             )
                         }
                     )
                 }
 
-                composable<AppRoutes.MovieDetails> {
+                composable<AppRoutes.MovieDetail> {
                     MovieDetailRoute()
                 }
             }

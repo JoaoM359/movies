@@ -1,8 +1,9 @@
 package com.example.movies.data.repository
 
+import com.example.movies.data.mapper.toModel
 import com.example.movies.data.network.KtorClient
+import com.example.movies.domain.model.Movie
 import com.example.movies.domain.model.MovieSection
-import com.example.movies.domain.model.toModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -37,6 +38,20 @@ class MoviesRepository(
                     movies = upcomingMovies.results.map { it.toModel() }
                 )
             )
+        }
+    }
+
+    suspend fun getMovieDetail(movieId: Int): Result<Movie> {
+        return withContext(ioDispatcher) {
+            runCatching {
+                val movieDetailDeferred = async { ktorClient.getMovieDetails(movieId) }
+                val creditsDeferred = async { ktorClient.getCredits(movieId) }
+
+                val movieDetailResponse = movieDetailDeferred.await()
+                val creditsResponse = creditsDeferred.await()
+
+                movieDetailResponse.toModel(creditsResponse.cast)
+            }
         }
     }
 }
