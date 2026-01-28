@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
@@ -51,6 +53,7 @@ import compose.icons.fontawesomeicons.solid.Clock
 import compose.icons.fontawesomeicons.solid.Play
 import compose.icons.fontawesomeicons.solid.Star
 import movies.composeapp.generated.resources.Res
+import movies.composeapp.generated.resources.movies_detail_title
 import movies.composeapp.generated.resources.movies_detail_watch_trailer
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -58,25 +61,30 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MovieDetailRoute(
-    viewModel: MovieDetailViewModel = koinViewModel()
+    viewModel: MovieDetailViewModel = koinViewModel(),
+    navigateBack: () -> Unit
 ) {
     val movieDetailState by viewModel.movieDetailState.collectAsStateWithLifecycle()
 
     MovieDetailScreen(
-        movieDetailState = movieDetailState
+        movieDetailState = movieDetailState,
+        onNavigationIconClick = navigateBack
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieDetailScreen(
-    movieDetailState: MovieDetailViewModel.MovieDetailState
+    movieDetailState: MovieDetailViewModel.MovieDetailState,
+    onNavigationIconClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Movie Detail")
+                    Text(
+                        text = stringResource(Res.string.movies_detail_title)
+                    )
                 },
                 navigationIcon = {
                     Surface(
@@ -84,7 +92,7 @@ fun MovieDetailScreen(
                         shape = MaterialTheme.shapes.small
                     ) {
                         IconButton(
-                            onClick = {},
+                            onClick = onNavigationIconClick,
                             modifier = Modifier.size(32.dp)
                         ) {
                             Icon(
@@ -135,8 +143,12 @@ private fun MovieDetailContent(
     movie: Movie,
     modifier: Modifier = Modifier
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
     ) {
         Surface(
             modifier = Modifier
@@ -264,7 +276,9 @@ private fun MovieDetailContent(
             }
 
             Box(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
             ) {
                 Text(
                     text = "This is just a placeholder text",
@@ -280,7 +294,8 @@ private fun MovieDetailContent(
 private fun MoviesDetailScreensPreview() {
     MoviesAppTheme {
         MovieDetailScreen(
-            movieDetailState = MovieDetailViewModel.MovieDetailState.Success(movie1)
+            movieDetailState = MovieDetailViewModel.MovieDetailState.Success(movie1),
+            onNavigationIconClick = {}
         )
     }
 }
