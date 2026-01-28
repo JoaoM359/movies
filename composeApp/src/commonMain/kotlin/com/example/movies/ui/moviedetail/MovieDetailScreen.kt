@@ -1,6 +1,5 @@
 package com.example.movies.ui.moviedetail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -15,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.AsyncImage
 import com.example.movies.domain.model.Movie
 import com.example.movies.domain.model.movie1
 import com.example.movies.ui.components.CastMemberItem
@@ -50,8 +51,8 @@ import compose.icons.fontawesomeicons.solid.Clock
 import compose.icons.fontawesomeicons.solid.Play
 import compose.icons.fontawesomeicons.solid.Star
 import movies.composeapp.generated.resources.Res
-import movies.composeapp.generated.resources.minecraft_movie
-import org.jetbrains.compose.resources.painterResource
+import movies.composeapp.generated.resources.movies_detail_watch_trailer
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -144,8 +145,8 @@ private fun MovieDetailContent(
                 .weight(1f),
             shape = MaterialTheme.shapes.large
         ) {
-            Image(
-                painter = painterResource(Res.drawable.minecraft_movie),
+            AsyncImage(
+                model = movie.posterUrl,
                 contentDescription = null,
                 modifier = Modifier.clip(MaterialTheme.shapes.large),
                 contentScale = Crop
@@ -178,23 +179,25 @@ private fun MovieDetailContent(
                 // Rating
                 MovieInfoItem(
                     icon = FontAwesomeIcons.Solid.Star,
-                    text = "7.5"
+                    text = movie.rating
                 )
 
                 Spacer(modifier = Modifier.width(16.dp))
 
                 // Duration
-                MovieInfoItem(
-                    icon = FontAwesomeIcons.Solid.Clock,
-                    text = "2h 36min"
-                )
+                movie.duration?.let { duration ->
+                    MovieInfoItem(
+                        icon = FontAwesomeIcons.Solid.Clock,
+                        text = duration
+                    )
+                }
 
                 Spacer(modifier = Modifier.width(16.dp))
 
                 // Year
                 MovieInfoItem(
                     icon = FontAwesomeIcons.Solid.Calendar,
-                    text = "2022"
+                    text = "${movie.year}"
                 )
             }
 
@@ -203,9 +206,15 @@ private fun MovieDetailContent(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                MovieGenreChip(
-                    genre = "Action"
-                )
+                movie.genres?.forEachIndexed { index, genre ->
+                    MovieGenreChip(
+                        genre = genre.name
+                    )
+
+                    if (index < movie.genres.size - 1) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -223,34 +232,37 @@ private fun MovieDetailContent(
                 )
 
                 Text(
-                    text = "Watch Trailer",
+                    text = stringResource(Res.string.movies_detail_watch_trailer),
                     modifier = Modifier.padding(start = 16.dp),
                     fontWeight = FontWeight.Medium,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            movie.castMembers?.let { castMembers ->
+                Spacer(modifier = Modifier.height(16.dp))
 
-            BoxWithConstraints(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                val itemWidth = this.maxWidth * 0.55f
-
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                BoxWithConstraints(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    items(10) {
-                        CastMemberItem(
-                            profilePictureUrl = "",
-                            name = "Will Smith",
-                            character = "John Smith",
-                            modifier = Modifier.width(itemWidth)
-                        )
+                    val itemWidth = this.maxWidth * 0.55f
+
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(castMembers) { castMember ->
+                            CastMemberItem(
+                                profilePictureUrl = castMember.profileUrl,
+                                name = castMember.name,
+                                character = castMember.character,
+                                modifier = Modifier.width(itemWidth)
+                            )
+                        }
                     }
                 }
             }
+
             Box(
                 modifier = Modifier.padding(16.dp)
             ) {
