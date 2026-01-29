@@ -24,7 +24,7 @@ import movies.composeapp.generated.resources.api_access_token
 import org.jetbrains.compose.resources.getString
 
 private const val BASE_URL = "https://api.themoviedb.org"
-const val IMAGE_SMALL_BASE_URL = "https://image.tmdb.org/t/p/w154"
+const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p"
 
 class KtorClient {
     private val client = HttpClient {
