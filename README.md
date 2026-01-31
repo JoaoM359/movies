@@ -1,3 +1,10 @@
+# About
+This repository contains the implementation of a Kotlin Multiplatform app that lists movies and shows their details. 
+
+It was developed following the Udemy Course [Domine o Kotlin Multiplataforma na Prática com Compose](https://www.udemy.com/course/domine-o-kotlin-multiplataforma-na-pratica-com-compose).
+
+
+## Project Structure
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
@@ -12,7 +19,8 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 * [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
 
-### Build and Run Android Application
+
+## Build and Run Android Application
 
 To build and run the development version of the Android app, use the run configuration from the run widget
 in your IDE’s toolbar or build it directly from the terminal:
@@ -25,10 +33,33 @@ in your IDE’s toolbar or build it directly from the terminal:
   .\gradlew.bat :composeApp:assembleDebug
   ```
 
-### Build and Run iOS Application
+
+## Build and Run iOS Application
 
 To build and run the development version of the iOS app, use the run configuration from the run widget
 in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+
+
+## Tools
+
+- _Ktor client_ for network request
+- _Coil_ for image caching
+- _Koin_ for dependency injection
+- _Xicon_ for icons
+- _MediaPlayer - KMP_ for video playback
+- _The Movie Database (TMDB)_ for api of the movies
+
+
+## Screenshots
+
+|                   | Android                                                                      | iOS                                                                  |
+|-------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| MoviesListScreen  | ![moviesListScreenAndroid](assets/screenshots/moviesListScreenAndroid.png)   | ![moviesListScreenIOS](assets/screenshots/moviesListScreenIOS.png)   |
+| MovieDetailScreen | ![movieDetailScreenAndroid](assets/screenshots/movieDetailScreenAndroid.png) | ![movieDetailScreenIOS](assets/screenshots/movieDetailScreenIOS.png) |
+
+
+## Conclusion Certificate
+![movieDetailScreenAndroid](assets/conclusionCertificate.jpg)
 
 ---
 
