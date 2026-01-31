@@ -52,11 +52,12 @@ in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and r
 
 ## Screenshots
 
-|                   | Android                                                                      | iOS                                                                  |
-|-------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| MoviesListScreen  | ![moviesListScreenAndroid](assets/screenshots/moviesListScreenAndroid.png)   | ![moviesListScreenIOS](assets/screenshots/moviesListScreenIOS.png)   |
-| MovieDetailScreen | ![movieDetailScreenAndroid](assets/screenshots/movieDetailScreenAndroid.png) | ![movieDetailScreenIOS](assets/screenshots/movieDetailScreenIOS.png) |
 
+
+|                   | Android                                                                                                   | iOS                                                                                               |
+|-------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| MoviesListScreen  | <img src="assets/screenshots/moviesListScreenAndroid.png" alt="moviesListScreenAndroid" height="500px">   | <img src="assets/screenshots/moviesListScreenIOS.png" alt="moviesListScreenIOS" height="500px">   |
+| MovieDetailScreen | <img src="assets/screenshots/movieDetailScreenAndroid.png" alt="movieDetailScreenAndroid" height="500px"> | <img src="assets/screenshots/movieDetailScreenIOS.png" alt="movieDetailScreenIOS" height="500px"> |                                                                                                 |
 
 ## Conclusion Certificate
 ![movieDetailScreenAndroid](assets/conclusionCertificate.jpg)
