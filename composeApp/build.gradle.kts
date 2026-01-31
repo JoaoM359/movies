@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.xicon.pack.z)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.mediaplayer.kmp)
         }
 
         iosMain.dependencies {
